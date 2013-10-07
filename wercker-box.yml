@@ -1,5 +1,5 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
-version : 0.0.2
+version : 0.0.3
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type : main
 platform : ubuntu@12.04
@@ -11,7 +11,8 @@ keywords:
 script: |
   wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
   source /home/ubuntu/.bash_profile
-  nvm install 0.10.12
+  nvm install 0.10
+  nvm use 0.10
   node --version
   npm --version
   curl https://install.meteor.com | /bin/sh
