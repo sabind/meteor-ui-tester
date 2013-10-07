@@ -1,8 +1,39 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
 version : 0.0.4
-inherits : wercker/ubuntu12.04-webessentials@0.0.11
+inherits : wercker/ubuntu12.04-chef10.18.2@0.0.8
 type : main
 platform : ubuntu@12.04
+packages:
+  - wget
+  - build-essential
+  - curl
+  - git-core
+  - nano
+  - language-pack-en
+  - libxslt-dev
+  - libxml2-dev
+  - imagemagick
+  - libmagickwand-dev
+  - zlib1g-dev
+  - libfreetype6-dev
+  - liblcms1-dev
+  - libjpeg8-dev
+  - libevent-dev
+  - libev-dev
+  - libyaml-dev
+  - libffi-dev
+  - libtidy-dev
+  - libsqlite3-dev
+  - libcurl4-openssl-dev
+  - libssl-dev
+  - libmemcached-dev
+  - xvfb
+  - firefox
+  - libqtwebkit4
+  - wkhtmltopdf
+  - elasticsearch@0.20.5
+  - phantomjs@1.8.2
+  - libv8-dev
 services:
   - wercker/mongodb 
 keywords:
@@ -10,19 +41,20 @@ keywords:
   - meteor
   - mongodb
 script: |
-  wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
-  source /home/ubuntu/.bash_profile
-  node --version
-  npm --version
-  curl https://install.meteor.com | /bin/sh
-  npm install -g meteorite
-  mrt --version
-  \curl -L https://get.rvm.io | bash -s stable
+  curl -L https://get.rvm.io | bash -s stable
   rvm install 2.0.0
   rvm user 2.0.0
   ruby -v
   sudo gem install cucumber
   sudo gem install selenium-webdriver
+  wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
+  source /home/ubuntu/.bash_profile
+  nvm install 0.10
+  node --version
+  npm --version
+  curl https://install.meteor.com | /bin/sh
+  npm install -g meteorite
+  mrt --version
   export DISPLAY=:99.0  
   sh -e /etc/init.d/xvfb start
 env:  
