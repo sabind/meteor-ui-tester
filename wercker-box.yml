@@ -10,6 +10,7 @@ keywords:
   - meteor
 script: |
   wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
+  source /home/ubuntu/.bash_profile
   nvm install 0.10.12
   node --version
   npm --version
