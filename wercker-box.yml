@@ -1,5 +1,5 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
-version : 0.0.4
+version : 0.0.5
 inherits : wercker/ubuntu12.04-chef10.18.2@0.0.8
 type : main
 platform : ubuntu@12.04
@@ -42,6 +42,8 @@ keywords:
   - mongodb
 script: |
   curl -L https://get.rvm.io | bash -s stable
+  echo 'source ~/.profile' >> /home/ubuntu/.bash_profile
+  source /home/ubuntu/.bash_profile
   rvm install 2.0.0
   rvm user 2.0.0
   ruby -v
