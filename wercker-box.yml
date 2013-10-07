@@ -1,5 +1,5 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
-version : 0.0.3
+version : 0.0.4
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type : main
 platform : ubuntu@12.04
@@ -8,11 +8,10 @@ services:
 keywords:
   - nodejs
   - meteor
+  - mongodb
 script: |
   wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
   source /home/ubuntu/.bash_profile
-  nvm install 0.10
-  nvm use 0.10
   node --version
   npm --version
   curl https://install.meteor.com | /bin/sh
@@ -22,8 +21,8 @@ script: |
   rvm install 2.0.0
   rvm user 2.0.0
   ruby -v
-  gem install cucumber
-  gem install selenium-webdriver
+  sudo gem install cucumber
+  sudo gem install selenium-webdriver
   export DISPLAY=:99.0  
   sh -e /etc/init.d/xvfb start
 env:  
