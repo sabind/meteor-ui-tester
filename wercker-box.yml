@@ -1,5 +1,5 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
-version : 0.0.7
+version : 0.0.8
 inherits : wercker/ubuntu12.04-chef10.18.2@0.0.8
 type : main
 platform : ubuntu@12.04
@@ -7,7 +7,7 @@ packages:
   - wget
   - build-essential
   - curl
-  - git-core
+  - git
   - nano
   - language-pack-en
   - libxslt-dev
@@ -47,18 +47,18 @@ script: |
   ruby -v
   rvmsudo gem install cucumber --no-rdoc --no-ri
   rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
-  wget -qO- https://raw.github.com/creationix/nvm/master/install-gitless.sh | sh
+  curl https://raw.github.com/creationix/nvm/master/install.sh | sh
   source /home/ubuntu/.bash_profile
   nvm install 0.10
   node --version
   npm --version
-  curl https://install.meteor.com | /bin/sh
+  curl https://install.meteor.com | sh
   npm install -g meteorite
   mrt --version
   export DISPLAY=:99.0  
   sh -e /etc/init.d/xvfb start
 env:  
   RUBY_VERSION: "2.0.0"
-  NODE_VERSION: "0.10.12"
+  NODE_VERSION: "0.10"
   METEOR_VERSION: "0.6.5.1"
   
