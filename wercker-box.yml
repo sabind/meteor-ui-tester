@@ -1,5 +1,5 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
-version : 0.0.5
+version : 0.0.7
 inherits : wercker/ubuntu12.04-chef10.18.2@0.0.8
 type : main
 platform : ubuntu@12.04
@@ -44,10 +44,9 @@ script: |
   curl -L https://get.rvm.io | bash -s stable
   source /home/ubuntu/.bash_profile
   rvm install 2.0.0
-  rvm user 2.0.0
   ruby -v
-  sudo gem install cucumber
-  sudo gem install selenium-webdriver
+  rvmsudo gem install cucumber --no-rdoc --no-ri
+  rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
   wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
   source /home/ubuntu/.bash_profile
   nvm install 0.10
