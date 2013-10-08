@@ -1,41 +1,9 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
 version : 0.0.10
-inherits : wercker/ubuntu12.04-chef10.18.2@0.0.8
 type : main
 platform : ubuntu@12.04
 packages:
-  - wget
-  - build-essential
-  - curl
-  - git
-  - nano
-  - language-pack-en
-  - libxslt-dev
-  - libxml2-dev
-  - imagemagick
-  - libmagickwand-dev
-  - zlib1g-dev
-  - libfreetype6-dev
-  - liblcms1-dev
-  - libjpeg8-dev
-  - libevent-dev
-  - libev-dev
-  - libyaml-dev
-  - libffi-dev
-  - libtidy-dev
-  - libsqlite3-dev
-  - libcurl4-openssl-dev
-  - libssl-dev
-  - libmemcached-dev
-  - xvfb
-  - firefox
-  - libqtwebkit4
-  - wkhtmltopdf
-  - elasticsearch@0.20.5
-  - phantomjs@1.8.2
-  - libv8-dev
-services:
-  - wercker/mongodb 
+  - meteor@0.6.4
 keywords:
   - nodejs
   - meteor
@@ -47,18 +15,37 @@ script: |
   ruby -v
   rvmsudo gem install cucumber --no-rdoc --no-ri
   rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
-  curl https://slack-files.com/files-pub/T024F7HJM-F024FEB05-2bbdf7/download/install_nvm_ubuntu_no_git.txt | sh
-  source /home/ubuntu/.bash_profile
-  nvm install 0.10
-  node --version
-  npm --version
-  curl https://install.meteor.com | sh
-  npm install -g meteorite
-  mrt --version
+  
+  echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
+  echo 'deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main' | sudo tee /etc/apt/sources.list.d/nodejs.list
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv C7917B12
+  sudo apt-get update
+  sudo apt-get install build-essential nodejs mongodb-10gen curl wget libfreetype6-dev libfontconfig1-dev
+  sudo stop mongodb
+  sleep 5
+
+  echo 'nojournal = true' | sudo tee -a /etc/mongodb.conf
+  echo 'verbose = true' | sudo tee -a /etc/mongodb.conf
+  echo 'noprealloc = true' | sudo tee -a /etc/mongodb.conf
+  echo 'smallfiles = true' | sudo tee -a /etc/mongodb.conf
+  /bin/sh install.sh
+
+  # Create and own /data directory
+  sudo mkdir -p /data/db/
+  sudo chown -R mongodb:mongodb /data/
+
+  # Install meteorite
+  sudo npm install -g meteorite
+  type mrt || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
+  
+  # Install git
+  sudo apt-get install git
+  type git || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
+  
   export DISPLAY=:99.0  
   sh -e /etc/init.d/xvfb start
-env:  
+env:
   RUBY_VERSION: "2.0.0"
-  NODE_VERSION: "0.10"
-  METEOR_VERSION: "0.6.5.1"
-  
+  NODE_VERSION: "0.10.11"
+  METEOR_VERSION: "0.6.4"
