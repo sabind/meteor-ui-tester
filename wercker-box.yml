@@ -42,7 +42,6 @@ keywords:
   - mongodb
 script: |
   curl -L https://get.rvm.io | bash -s stable
-  echo 'source ~/.profile' >> /home/ubuntu/.bash_profile
   source /home/ubuntu/.bash_profile
   rvm install 2.0.0
   rvm user 2.0.0
