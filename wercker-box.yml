@@ -1,19 +1,21 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
-version : 0.0.11
+version : 0.0.12
 type : main
 platform : ubuntu@12.04
 packages:
   - firefox
 keywords:
   - firefox
-  - ruby
+  - ruby@2.0.0
   - meteorite
   - cucumber
   - xvfb
   - selenium
-  - nodejs
-  - meteor
+  - nodejs@0.10.20
+  - meteor@6.5.1
   - mongodb
+descripton:
+  I built this box instead of the standard MeteorJS since I needed additional support for Ruby + Cucumber + Xvfb since I don't run my automation through JS.
 script: |
   echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
   echo 'deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main' | sudo tee /etc/apt/sources.list.d/nodejs.list
