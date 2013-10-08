@@ -19,6 +19,11 @@ script: |
   sudo stop mongodb
   sleep 5
 
+  echo 'nojournal = true' | sudo tee -a /etc/mongodb.conf
+  echo 'verbose = true' | sudo tee -a /etc/mongodb.conf
+  echo 'noprealloc = true' | sudo tee -a /etc/mongodb.conf
+  echo 'smallfiles = true' | sudo tee -a /etc/mongodb.conf
+
   # Install git
   sudo apt-get install git
   type git || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
@@ -30,16 +35,12 @@ script: |
   rvmsudo gem install cucumber --no-rdoc --no-ri
   rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
 
-  echo 'nojournal = true' | sudo tee -a /etc/mongodb.conf
-  echo 'verbose = true' | sudo tee -a /etc/mongodb.conf
-  echo 'noprealloc = true' | sudo tee -a /etc/mongodb.conf
-  echo 'smallfiles = true' | sudo tee -a /etc/mongodb.conf
-  /bin/sh install.sh
-
   # Create and own /data directory
   sudo mkdir -p /data/db/
   sudo chown -R mongodb:mongodb /data/
 
+  curl https://install.meteor.com | /bin/sh
+  
   # Install meteorite
   sudo npm install -g meteorite
   type mrt || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
