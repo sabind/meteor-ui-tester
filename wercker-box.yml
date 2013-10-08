@@ -22,7 +22,7 @@ script: |
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv C7917B12
   sudo apt-get update
-  sudo apt-get install build-essential nodejs mongodb-10gen curl wget libfreetype6-dev libfontconfig1-dev xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x11-apps
+  sudo apt-get install firefox build-essential nodejs mongodb-10gen curl wget libfreetype6-dev libfontconfig1-dev xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x11-apps
   sudo stop mongodb
   sleep 5
 
