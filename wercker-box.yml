@@ -55,7 +55,7 @@ script: |
   type mrt || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
     
   # sh -e /etc/init.d/xvfb start
-  Xvfb :99 -screen 0 1024x720x16
+  nohup bash -c "Xvfb :99 -screen 0 1024x720x16 &" && sleep 4
 
 env:
   RUBY_VERSION: "2.0.0"
