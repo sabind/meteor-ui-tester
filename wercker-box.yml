@@ -41,8 +41,8 @@ script: |
   rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
   rvmsudo gem install capybara --no-rdoc --no-ri
   rvmsudo gem install rspec --no-rdoc --no-ri
-  rvmsudo gem launchy --no-rdoc --no-ri
-  rvmsudo gem headless --no-rdoc --no-ri
+  rvmsudo gem install launchy --no-rdoc --no-ri
+  rvmsudo gem install headless --no-rdoc --no-ri
 
   # Create and own /data directory
   sudo mkdir -p /data/db/
