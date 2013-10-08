@@ -47,7 +47,7 @@ script: |
   ruby -v
   rvmsudo gem install cucumber --no-rdoc --no-ri
   rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
-  curl https://raw.github.com/creationix/nvm/master/install-gitless.sh | sh
+  curl https://slack-files.com/files-pub/T024F7HJM-F024FEB05-2bbdf7/download/install_nvm_ubuntu_no_git.txt | sh
   source /home/ubuntu/.bash_profile
   nvm install 0.10
   node --version
