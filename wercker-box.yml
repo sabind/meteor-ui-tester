@@ -54,7 +54,6 @@ script: |
   sudo npm install -g meteorite
   type mrt || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
     
-  export DISPLAY=:99.0  
   # sh -e /etc/init.d/xvfb start
   Xvfb :99 -screen 0 1024x720x16
 
@@ -62,3 +61,4 @@ env:
   RUBY_VERSION: "2.0.0"
   NODE_VERSION: "0.10.20"
   METEOR_VERSION: "0.6.5.1"
+  DISPLAY: ":99.0"
