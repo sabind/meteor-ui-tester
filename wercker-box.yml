@@ -15,7 +15,7 @@ script: |
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv C7917B12
   sudo apt-get update
-  sudo apt-get install build-essential nodejs mongodb-10gen curl wget libfreetype6-dev libfontconfig1-dev
+  sudo apt-get install build-essential nodejs mongodb-10gen curl wget libfreetype6-dev libfontconfig1-dev xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x11-apps
   sudo stop mongodb
   sleep 5
 
@@ -34,13 +34,17 @@ script: |
   ruby -v
   rvmsudo gem install cucumber --no-rdoc --no-ri
   rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
+  rvmsudo gem install capybara --no-rdoc --no-ri
+  rvmsudo gem install rspec --no-rdoc --no-ri
+  rvmsudo gem launchy --no-rdoc --no-ri
+  rvmsudo gem headless --no-rdoc --no-ri
 
   # Create and own /data directory
   sudo mkdir -p /data/db/
   sudo chown -R mongodb:mongodb /data/
 
   curl https://install.meteor.com | /bin/sh
-  
+
   # Install meteorite
   sudo npm install -g meteorite
   type mrt || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
@@ -49,5 +53,5 @@ script: |
   sh -e /etc/init.d/xvfb start
 env:
   RUBY_VERSION: "2.0.0"
-  NODE_VERSION: "0.10.11"
-  METEOR_VERSION: "0.6.4"
+  NODE_VERSION: "0.10.20"
+  METEOR_VERSION: "0.6.5.1"
