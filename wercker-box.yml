@@ -3,19 +3,13 @@ version : 0.0.10
 type : main
 platform : ubuntu@12.04
 packages:
+  - firefox
   - meteor@0.6.4
 keywords:
   - nodejs
   - meteor
   - mongodb
 script: |
-  curl -L https://get.rvm.io | bash -s stable
-  source /home/ubuntu/.bash_profile
-  rvm install 2.0.0
-  ruby -v
-  rvmsudo gem install cucumber --no-rdoc --no-ri
-  rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
-  
   echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
   echo 'deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main' | sudo tee /etc/apt/sources.list.d/nodejs.list
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
@@ -24,6 +18,17 @@ script: |
   sudo apt-get install build-essential nodejs mongodb-10gen curl wget libfreetype6-dev libfontconfig1-dev
   sudo stop mongodb
   sleep 5
+
+  # Install git
+  sudo apt-get install git
+  type git || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
+
+  curl -L https://get.rvm.io | bash -s stable
+  source /home/ubuntu/.bash_profile
+  rvm install 2.0.0
+  ruby -v
+  rvmsudo gem install cucumber --no-rdoc --no-ri
+  rvmsudo gem install selenium-webdriver --no-rdoc --no-ri
 
   echo 'nojournal = true' | sudo tee -a /etc/mongodb.conf
   echo 'verbose = true' | sudo tee -a /etc/mongodb.conf
@@ -38,11 +43,7 @@ script: |
   # Install meteorite
   sudo npm install -g meteorite
   type mrt || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
-  
-  # Install git
-  sudo apt-get install git
-  type git || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
-  
+    
   export DISPLAY=:99.0  
   sh -e /etc/init.d/xvfb start
 env:
