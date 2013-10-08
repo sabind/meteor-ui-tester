@@ -1,5 +1,5 @@
 name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
-version : 0.0.13
+version : 0.0.14
 type : main
 platform : ubuntu@12.04
 packages:
@@ -55,9 +55,6 @@ script: |
   # Install meteorite
   sudo npm install -g meteorite
   type mrt || { echo "Meteorite not found after installation! Terminating..."; exit 1; }
-    
-  # sh -e /etc/init.d/xvfb start
-  nohup bash -c "Xvfb :99 -screen 0 1024x720x16 &" && sleep 4
 
 env:
   RUBY_VERSION: "2.0.0"
