@@ -4,8 +4,13 @@ type : main
 platform : ubuntu@12.04
 packages:
   - firefox
-  - meteor@0.6.4
 keywords:
+  - firefox
+  - ruby
+  - meteorite
+  - cucumber
+  - xvfb
+  - selenium
   - nodejs
   - meteor
   - mongodb
